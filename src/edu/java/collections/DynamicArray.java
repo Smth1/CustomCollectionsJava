@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Collections1;
+package edu.java.collections;
 
 import java.util.*;
-
 
 /**
  *
@@ -14,7 +13,7 @@ import java.util.*;
  * @param <T>
  */
 public class DynamicArray<T> {
-    private Object elements[];
+    private T elements[];
     
     private int sizeArray;
     
@@ -23,7 +22,7 @@ public class DynamicArray<T> {
     }
     
     public DynamicArray(int initialSize) {
-        this.elements = new Object[initialSize];
+        this.elements = (T[])new Object[initialSize];
         sizeArray = 0;
     }
     
@@ -32,7 +31,7 @@ public class DynamicArray<T> {
     }
     
     public DynamicArray(T[] array) {
-        this.elements = new Object[array.length];
+        this.elements = (T[])new Object[array.length];
         System.arraycopy(array, 0, elements, 0 , array.length);
         sizeArray = array.length;
     }
@@ -46,28 +45,30 @@ public class DynamicArray<T> {
     
     public void resize(int newSize) {
         if (newSize > this.elements.length) {
-        Object[] newArray;
-        newArray = new Object[newSize];
-        System.arraycopy(this.elements, 0, newArray, 0, this.elements.length);
-        this.elements = newArray;
+            Object[] newArray = new Object[newSize];
+            System.arraycopy(this.elements, 0, newArray, 0, this.elements.length);
+            this.elements = (T[])newArray;
         }
     }
     
     public void delete(T element) {
         int index = indexOf(element);
+        
         if (index != -1)
-        System.arraycopy(elements, index + 1, elements, index, sizeArray-index);
+            System.arraycopy(elements, index + 1, elements, index, sizeArray-index);
+        
         sizeArray--;
     }
     
     public void deleteAt(int index) {
-        if(index>=0 && index < sizeArray)
+        if ((index >= 0) && (index < sizeArray))
             System.arraycopy(elements, index + 1, elements, index, sizeArray-index);
+        
         sizeArray--;
     }
     
     public int indexOf(T element) {
-        for(int i=0;i<sizeArray;i++) {
+        for(int i = 0; i < sizeArray; i++) {
             if (element == elements[i])
                 return i;
         }
@@ -85,15 +86,17 @@ public class DynamicArray<T> {
     }
     
     public void clear() {
-        for (int i=0;i<sizeArray;i++)
+        for (int i = 0; i < sizeArray; i++)
             elements[i] = null;
+        
         sizeArray = 0;
     }
     
     public void addRange(Collection<T> collection) {
        Object[] temp = collection.toArray();
+       
        rangeCheck(sizeArray + temp.length);
        System.arraycopy(temp, 0, this.elements, this.sizeArray , temp.length);
-       sizeArray+=temp.length;
+       sizeArray += temp.length;
     }
 }
