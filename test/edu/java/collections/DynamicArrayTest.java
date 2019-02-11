@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Collections1;
+package edu.java.collections;
 
-import edu.java.collections.DynamicArray;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -44,14 +43,12 @@ public class DynamicArrayTest {
     @Test
     public void testSize() {
         System.out.println("size");
-        DynamicArray<String> instance = new DynamicArray<String>();
-        
-           
+        DynamicArray instance = new DynamicArray();
         int expResult = 0;
         int result = instance.size();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        fail("The test case is a prototype.");
     }
 
     /**
@@ -64,7 +61,7 @@ public class DynamicArrayTest {
         DynamicArray instance = new DynamicArray();
         instance.Add(element);
         // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        fail("The test case is a prototype.");
     }
 
     /**
