@@ -10,6 +10,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 /**
@@ -41,41 +42,41 @@ public class DynamicArrayTest {
      * Test of size method, of class DynamicArray.
      */
     @Test
-    public void testSize() {
+    public void testSize() {////////////////success
         System.out.println("size");
-        DynamicArray instance = new DynamicArray();
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
         int expResult = 0;
         int result = instance.size();
+        //1 test
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //2 test
+        for(int i=0;i< 50;i++)
+            instance.Add(i * 4);
+        expResult = 50;
+        result = instance.size();
+        assertEquals(expResult,result);
+        //3 test
+        for (int i=0;i<25;i++)
+            instance.deleteAt(0);
+        expResult = 25;
+        result = instance.size();
+        assertEquals(expResult,result);
     }
 
     /**
      * Test of Add method, of class DynamicArray.
      */
     @Test
-    public void testAdd() {
+    public void testAdd() {///////////////success
         System.out.println("Add");
-        Object element = null;
-        DynamicArray instance = new DynamicArray();
+        String element = "string instance";
+        DynamicArray<String> instance = new DynamicArray<String>();
         instance.Add(element);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String actual = instance.get(0);
+        assertEquals(element,actual);
     }
 
-    /**
-     * Test of resize method, of class DynamicArray.
-     */
-    @Test
-    public void testResize() {
-        System.out.println("resize");
-        int newSize = 0;
-        DynamicArray instance = new DynamicArray();
-        instance.resize(newSize);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    
 
     /**
      * Test of delete method, of class DynamicArray.
@@ -83,11 +84,15 @@ public class DynamicArrayTest {
     @Test
     public void testDelete() {
         System.out.println("delete");
-        Object element = null;
-        DynamicArray instance = new DynamicArray();
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        int element = 8;
+        int expected,actual;
+        for(int i=0;i<10;i++)
+            instance.Add(i);
         instance.delete(element);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        actual = instance.indexOf(element);
+        expected = -1;
+        assertEquals(expected,actual);
     }
 
     /**
@@ -99,62 +104,72 @@ public class DynamicArrayTest {
         int index = 0;
         DynamicArray instance = new DynamicArray();
         instance.deleteAt(index);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of indexOf method, of class DynamicArray.
      */
     @Test
-    public void testIndexOf() {
-        System.out.println("indexOf");
-        Object element = null;
-        DynamicArray instance = new DynamicArray();
-        int expResult = 0;
-        int result = instance.indexOf(element);
+    public void testIndexOf() {////success
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        for(int i=0;i<10;i++)
+            instance.Add(i);
+        int result = instance.indexOf(6);
+        int expResult = 6;
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of get method, of class DynamicArray.
      */
     @Test
-    public void testGet() {
+    public void testGet() {////////////////*
         System.out.println("get");
-        int index = 0;
-        DynamicArray instance = new DynamicArray();
-        Object expResult = null;
-        Object result = instance.get(index);
+        DynamicArray<String> instance = new DynamicArray<String>();
+        String expResult = "nu11";
+        for(int i=0;i<20;i++)
+            instance.Add("nu" + i);
+        String result = instance.get(11);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of clear method, of class DynamicArray.
      */
     @Test
-    public void testClear() {
+    public void testClear() {////////////success
         System.out.println("clear");
-        DynamicArray instance = new DynamicArray();
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        int result;
+        int expResult;
+        for (int i =0;i<23;i++)
+            instance.Add(i);
         instance.clear();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        expResult = 0;
+        result = instance.size();
+        assertEquals(expResult,result);
     }
 
     /**
      * Test of addRange method, of class DynamicArray.
      */
     @Test
-    public void testAddRange() {
+    public void testAddRange() {///////////*
         System.out.println("addRange");
-        DynamicArray instance = new DynamicArray();
-        instance.addRange(null);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        ArrayList<Integer> list  = new ArrayList<Integer>();
+        int[] array = new int[100];
+        int[] expArray = new int[100];
+        for (int i=0;i<100;i++)
+        {
+            list.add(i*2);
+            expArray[i] = i*2;
+        }
+        instance.addRange(list);
+        for (int i=0;i<100;i++)
+            array[i] = instance.get(i);
+        assertArrayEquals("message",expArray,array);
+        
     }
     
 }

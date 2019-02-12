@@ -43,7 +43,7 @@ public class DynamicArray<T> {
             elements[sizeArray++] = element;
     }
     
-    public void resize(int newSize) {
+    private void resize(int newSize) {
         if (newSize > this.elements.length) {
             Object[] newArray = new Object[newSize];
             System.arraycopy(this.elements, 0, newArray, 0, this.elements.length);
@@ -82,7 +82,7 @@ public class DynamicArray<T> {
     
     private void rangeCheck(int index) {
         if (index >= sizeArray)
-            throw new IndexOutOfBoundsException("Array owerflowed");
+            throw new IndexOutOfBoundsException("Array owerflowed112");
     }
     
     public void clear() {
