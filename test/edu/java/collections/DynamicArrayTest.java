@@ -42,94 +42,246 @@ public class DynamicArrayTest {
      * Test of size method, of class DynamicArray.
      */
     @Test
-    public void testSize() {////////////////success
-        System.out.println("size");
+    public void testSizeEmpty() {///success
         DynamicArray<Integer> instance = new DynamicArray<Integer>();
         int expResult = 0;
         int result = instance.size();
-        //1 test
+        
         assertEquals(expResult, result);
-        //2 test
+    }
+    
+    /**
+     * Test of Size method, of class DynamicArray
+     */
+    @Test
+    public void testSizeFull() {///success
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        int expResult;
+        int result;
+        
         for(int i=0;i< 50;i++)
             instance.Add(i * 4);
+        
         expResult = 50;
         result = instance.size();
         assertEquals(expResult,result);
-        //3 test
+    }
+    
+    /**
+     * Test of Size method, of class DynamicArray
+     */
+    @Test
+    public void testSizeModified() {///success
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        int expResult;
+        int result;
+        
+        for(int i=0;i< 50;i++)
+            instance.Add(i * 4);
+        
         for (int i=0;i<25;i++)
             instance.deleteAt(0);
+        
         expResult = 25;
         result = instance.size();
+        
         assertEquals(expResult,result);
     }
-
+    
     /**
      * Test of Add method, of class DynamicArray.
      */
     @Test
-    public void testAdd() {///////////////success
-        System.out.println("Add");
+    public void testAdd() {///success
         String element = "string instance";
         DynamicArray<String> instance = new DynamicArray<String>();
+        
         instance.Add(element);
         String actual = instance.get(0);
+        
         assertEquals(element,actual);
     }
-
     
-
     /**
      * Test of delete method, of class DynamicArray.
      */
     @Test
-    public void testDelete() {
-        System.out.println("delete");
+    public void testDeleteDefault() {///success
         DynamicArray<Integer> instance = new DynamicArray<Integer>();
         int element = 8;
         int expected,actual;
+        
         for(int i=0;i<10;i++)
             instance.Add(i);
+        
         instance.delete(element);
         actual = instance.indexOf(element);
         expected = -1;
+        
         assertEquals(expected,actual);
     }
-
+    
+    /**
+     * Test of delete method, of class DynamicArray.
+     */
+    @Test
+    public void testDeleteEmpty() {///success
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        int element = 8;
+        int expected,actual;
+        
+        instance.delete(element);
+        
+        actual = instance.indexOf(element);
+        expected = -1;
+        
+        assertEquals(expected,actual);
+    }
+    
+    /**
+     * Test of delete method, of class DynamicArray
+     */
+    @Test
+    public void TestDeleteNotExist() {///success
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        int element = 18;
+        int expected,actual;
+        
+        for(int i=0;i<10;i++)
+            instance.Add(i);
+        
+        instance.delete(element);
+        actual = instance.indexOf(element);
+        expected = -1;
+        
+        assertEquals(expected,actual);
+    }
+    
+    /**
+     * Test of delete method, of class DynamicArray
+     */
+    @Test
+    public void testDeleteBegin() {///success
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        int element = 0;
+        int expected,actual;
+        
+        for(int i=0;i<10;i++)
+            instance.Add(i);
+        
+        instance.delete(element);
+        actual = instance.get(element);
+        expected = 1;
+        
+        assertEquals(expected,actual);
+    }
+    
+    /**
+     * Test of delete method, of class DynamicArray.
+     */
+    @Test
+    public void testDeleteEnd() {///success
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        int element = 9;
+        int expected,actual;
+        
+        for(int i=0;i<10;i++)
+            instance.Add(i);
+        
+        instance.delete(element);
+        actual = instance.get(element-1);
+        expected = 8;
+        
+        assertEquals(expected,actual);
+    }
+    
     /**
      * Test of deleteAt method, of class DynamicArray.
      */
     @Test
-    public void testDeleteAt() {
-        System.out.println("deleteAt");
-        int index = 0;
-        DynamicArray instance = new DynamicArray();
+    public void testDeleteAtInside() {///success
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        int index = 5;
+        int actual,expected;
+        
+        for(int i=0;i<10;i++)
+            instance.Add(i);
+        
         instance.deleteAt(index);
+        actual = instance.get(index);
+        expected = 6;
+        
+        assertEquals(expected,actual);
     }
-
+    
+    /**
+     * Test of deleteAt method, of class DynamicArray.
+     */
+    @Test
+    public void testDeleteAtOutside() {///success
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        int index = 15;
+        int actual,expected;
+        
+        for(int i=0;i<10;i++)
+            instance.Add(i);
+        
+        instance.deleteAt(index);
+        actual = instance.size();
+        expected = 10;
+        
+        assertEquals(expected,actual);
+    }
+    
     /**
      * Test of indexOf method, of class DynamicArray.
      */
     @Test
-    public void testIndexOf() {////success
+    public void testIndexOfInside() {////success
         DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        int result;
+        int expResult;
+        
         for(int i=0;i<10;i++)
             instance.Add(i);
-        int result = instance.indexOf(6);
-        int expResult = 6;
+        
+        result = instance.indexOf(6);
+        expResult = 6;
+        
         assertEquals(expResult, result);
     }
-
+    
+    /**
+     * Test of indexOf method, of class DynamicArray.
+     */
+    @Test
+    public void testIndexOfNotExist() {///success
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        int result;
+        int expResult;
+        
+        for(int i=0;i<10;i++)
+            instance.Add(i);
+        
+        result = instance.indexOf(11);
+        expResult = -1;
+        
+        assertEquals(expResult, result);
+    }
+    
     /**
      * Test of get method, of class DynamicArray.
      */
     @Test
-    public void testGet() {////////////////*
-        System.out.println("get");
+    public void testGet() {////////////////success
         DynamicArray<String> instance = new DynamicArray<String>();
         String expResult = "nu11";
+        String result;
+        
         for(int i=0;i<20;i++)
             instance.Add("nu" + i);
-        String result = instance.get(11);
+        result = instance.get(11);
+        
         assertEquals(expResult, result);
     }
 
@@ -137,37 +289,57 @@ public class DynamicArrayTest {
      * Test of clear method, of class DynamicArray.
      */
     @Test
-    public void testClear() {////////////success
-        System.out.println("clear");
+    public void testClearDefault() {////////////success
         DynamicArray<Integer> instance = new DynamicArray<Integer>();
         int result;
         int expResult;
+        
         for (int i =0;i<23;i++)
             instance.Add(i);
+        
         instance.clear();
         expResult = 0;
         result = instance.size();
+        
         assertEquals(expResult,result);
     }
-
+    
+    /**
+     * Test of clear method,of class DynamicArray.
+     */
+    public void testClearEmpty() {///success
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        int result;
+        int expResult;       
+        
+        instance.clear();
+        expResult = 0;
+        result = instance.size();
+        
+        assertEquals(expResult,result);
+    }
+    
     /**
      * Test of addRange method, of class DynamicArray.
      */
     @Test
-    public void testAddRange() {///////////*
-        System.out.println("addRange");
+    public void testAddRange() {///////////success
         DynamicArray<Integer> instance = new DynamicArray<Integer>();
         ArrayList<Integer> list  = new ArrayList<Integer>();
         int[] array = new int[100];
         int[] expArray = new int[100];
+        
         for (int i=0;i<100;i++)
         {
             list.add(i*2);
             expArray[i] = i*2;
         }
+        
         instance.addRange(list);
+        
         for (int i=0;i<100;i++)
             array[i] = instance.get(i);
+        
         assertArrayEquals("message",expArray,array);
         
     }

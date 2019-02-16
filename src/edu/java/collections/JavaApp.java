@@ -11,17 +11,24 @@ package edu.java.collections;
  */
 public class JavaApp {
     public static void main(String[] args) {
-        DynamicArray<String> array = new DynamicArray<String>();
-        array.Add("hello");
-        for (int i=0;i<100;i++) {array.Add("hello " + i);}
-        System.out.println(array.size());
-        for (int i=0;i<array.size();i++)
-            System.out.println(array.get(i));
-        array.deleteAt(50);
-        for (int i=0;i<array.size();i++)
-            System.out.println(array.get(i));
-        
-    }
-         
+        DynamicArray<Integer> instance = new DynamicArray<Integer>();
+        int expResult = 0;
+        int result = instance.size();
+        //1 test
+        System.out.println(expResult + "  " + result);
+        //2 test
+        for(int i=0;i< 50;i++)instance.Add(i * 4);
+        expResult = 50;
+        result = instance.size();
+        System.out.println(expResult + "  " + result);
+        //3 test
+        for (int i=0;i<25;i++) {
+            instance.deleteAt(0);
+            System.out.println(i);
+        }
+        expResult = 25;
+        result = instance.size();
+        System.out.println(expResult + " " + result);
+    }  
     
 }

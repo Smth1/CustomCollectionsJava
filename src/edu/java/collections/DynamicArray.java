@@ -54,17 +54,23 @@ public class DynamicArray<T> {
     public void delete(T element) {
         int index = indexOf(element);
         
-        if (index != -1)
-            System.arraycopy(elements, index + 1, elements, index, sizeArray-index);
-        
-        sizeArray--;
+        if (index != -1){
+            T[] temp = (T[])new Object[sizeArray-1];
+            System.arraycopy(elements, 0, temp, 0, index);
+            System.arraycopy(elements, index + 1, temp, index, elements.length - index -1);
+            elements = temp;
+            sizeArray--;
+        }
     }
     
     public void deleteAt(int index) {
-        if ((index >= 0) && (index < sizeArray))
-            System.arraycopy(elements, index + 1, elements, index, sizeArray-index);
-        
-        sizeArray--;
+        if ((index >= 0) && (index < sizeArray)){
+            T[] temp = (T[])new Object[sizeArray-1];
+            System.arraycopy(elements, 0, temp, 0, index);
+            System.arraycopy(elements, index + 1, temp, index, sizeArray - index -1);
+            elements = temp;
+            sizeArray--;
+        }
     }
     
     public int indexOf(T element) {
@@ -81,8 +87,8 @@ public class DynamicArray<T> {
     }
     
     private void rangeCheck(int index) {
-        if (index >= sizeArray)
-            throw new IndexOutOfBoundsException("Array owerflowed112");
+        if (index >= sizeArray || index <0)
+            throw new IndexOutOfBoundsException("Index is not valid");
     }
     
     public void clear() {
@@ -95,7 +101,9 @@ public class DynamicArray<T> {
     public void addRange(Collection<T> collection) {
        Object[] temp = collection.toArray();
        
-       rangeCheck(sizeArray + temp.length);
+       while (this.elements.length < sizeArray + temp.length)
+           resize(this.elements.length * 2);
+       
        System.arraycopy(temp, 0, this.elements, this.sizeArray , temp.length);
        sizeArray += temp.length;
     }
