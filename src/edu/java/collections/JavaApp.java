@@ -14,18 +14,21 @@ public class JavaApp {
         DynamicArray<Integer> instance = new DynamicArray<Integer>();
         int expResult = 0;
         int result = instance.size();
-        //1 test
+        
         System.out.println(expResult + "  " + result);
-        //2 test
-        for(int i=0;i< 50;i++)instance.Add(i * 4);
+        
+        for(int i=0;i< 50;i++)
+            instance.add(i * 4);
+        
         expResult = 50;
         result = instance.size();
         System.out.println(expResult + "  " + result);
-        //3 test
+        
         for (int i=0;i<25;i++) {
-            instance.deleteAt(0);
+            instance.remove(0);
             System.out.println(i);
         }
+        
         expResult = 25;
         result = instance.size();
         System.out.println(expResult + " " + result);

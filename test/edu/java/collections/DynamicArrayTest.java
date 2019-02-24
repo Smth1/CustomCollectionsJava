@@ -60,7 +60,7 @@ public class DynamicArrayTest {
         int result;
         
         for(int i=0;i< 50;i++)
-            instance.Add(i * 4);
+            instance.add(i * 4);
         
         expResult = 50;
         result = instance.size();
@@ -280,6 +280,7 @@ public class DynamicArrayTest {
         
         for(int i=0;i<20;i++)
             instance.Add("nu" + i);
+        
         result = instance.get(11);
         
         assertEquals(expResult, result);
